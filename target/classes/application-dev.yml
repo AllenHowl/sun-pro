@@ -1,0 +1,29 @@
+server:
+  port: 8080
+# 多数据源配置
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #最大活跃数
+      maxActive: 20
+      #初始化数量
+      initialSize: 1
+      #最大连接等待超时时间
+      maxWait: 60000
+      validation-query: select 1;
+      filter: stat,wall
+
+    db1:
+      jdbc-url: jdbc:mysql://rm-2zen0g2l5958x88y3so.mysql.rds.aliyuncs.com:3306/fjy_test
+      username: fjy
+      password: fanjinyang
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+    db2:
+      jdbc-url: jdbc:mysql://rm-2zen0g2l5958x88y3so.mysql.rds.aliyuncs.com:3306/fjy_test
+      username: fjy
+      password: fanjinyang
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+
