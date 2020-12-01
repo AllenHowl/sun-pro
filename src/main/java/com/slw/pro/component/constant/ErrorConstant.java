@@ -12,4 +12,6 @@ import com.slw.pro.component.ErrorCode;
 public interface ErrorConstant {
 
     ErrorCode NO_USER = new ErrorCode(1001,"用户不存在！");
+
+    ErrorCode ERROR_PARAMS = new ErrorCode(1002, "参数错误");
 }

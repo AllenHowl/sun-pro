@@ -1,5 +1,9 @@
 package com.slw.pro.utils;
 
+import com.slw.pro.component.constant.WebConstant;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
@@ -43,5 +47,11 @@ public class RequestUtil {
         buffer.deleteCharAt(buffer.length() - 1);
         buffer.append("}");
         return buffer.toString();
+    }
+
+    public static Long getLonginUid(){
+
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        return (Long) request.getAttribute(WebConstant.ATTRIBUTE_UID);
     }
 }

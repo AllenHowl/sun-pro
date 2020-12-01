@@ -40,6 +40,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
             Object attribute = session.getAttribute(WebConstant.SESSION_USER);
 
             if (attribute != null) {
+                request.setAttribute(WebConstant.ATTRIBUTE_UID,attribute);
                 return true;
             }
         }

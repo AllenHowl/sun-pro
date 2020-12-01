@@ -28,6 +28,13 @@ public class FrameResp {
         return frameResp;
     }
 
+    public static FrameResp buildError(){
+        FrameResp frameResp = new FrameResp();
+        frameResp.setH(new Header(-1,"服务繁忙，请稍后再试"));
+        frameResp.setB(new HashMap<>());
+        return frameResp;
+    }
+
     public FrameResp buildBody(String key,Object value){
         if (getB() == null) {
             setB(new HashMap<>());
