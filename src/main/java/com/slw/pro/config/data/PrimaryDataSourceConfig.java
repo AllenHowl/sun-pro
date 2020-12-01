@@ -2,8 +2,8 @@ package com.slw.pro.config.data;
 
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -54,23 +54,23 @@ public class PrimaryDataSourceConfig {
     // session工厂
     @Bean
     @Primary
-    public SqlSessionFactory primarySqlSessionFactory(@Qualifier("primaryDataSource") DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+    public MybatisSqlSessionFactoryBean primarySqlSessionFactory(@Qualifier(value = "primaryDataSource") DataSource dataSource) throws Exception {
+        MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-        return bean.getObject();
+        return bean;
     }
 
     // 事务
     @Bean
     @Primary
-    public DataSourceTransactionManager primaryTransactionManager(@Qualifier("primaryDataSource") DataSource dataSource) {
+    public DataSourceTransactionManager primaryTransactionManager(@Qualifier(value = "primaryDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
     // sessionTemplate
-    @Bean
+    @Bean("primarySqlSessionTemplate")
     @Primary
-    public SqlSessionTemplate primarySqlSessionTemplate(@Qualifier("primarySqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+    public SqlSessionTemplate primarySqlSessionTemplate(SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 

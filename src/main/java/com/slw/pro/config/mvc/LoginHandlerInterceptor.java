@@ -1,5 +1,7 @@
 package com.slw.pro.config.mvc;
 
+import com.slw.pro.component.BusinessException;
+import com.slw.pro.component.constant.WebConstant;
 import com.slw.pro.config.RequiredLogin;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.method.HandlerMethod;
@@ -8,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
 
 /**
@@ -31,11 +34,17 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         {
             return true;
         }
+        HttpSession session = request.getSession(false);
 
+        if (session != null) {
+            Object attribute = session.getAttribute(WebConstant.SESSION_USER);
 
+            if (attribute != null) {
+                return true;
+            }
+        }
 
-
-        return false;
+        throw new BusinessException(1000,"请先登录！");
     }
 
     @Override

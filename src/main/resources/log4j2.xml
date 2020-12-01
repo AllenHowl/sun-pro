@@ -88,7 +88,9 @@
         <logger name="org.mybatis" level="info"></logger>
         <logger name="com.sunliwei" level="debug">
             <AppenderRef ref="projectLog"/>
-
+        </logger>
+        <logger name="accessLog" level="info">
+            <AppenderRef ref="accessLog"></AppenderRef>
         </logger>
         <root level="all">
             <appender-ref ref="Console"/>

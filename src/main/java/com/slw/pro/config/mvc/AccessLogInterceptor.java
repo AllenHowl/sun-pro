@@ -28,12 +28,13 @@ public class AccessLogInterceptor implements HandlerInterceptor {
 
             String headerString = RequestUtil.requestHeaderToString(request);
             String paramString = RequestUtil.requestParamToString(request);
-
             Long uid = null;
             HttpSession session = request.getSession(false);
             if (session != null) {
-                User user = (User) session.getAttribute(WebConstant.SESSION_USER);
-                if (user != null) uid = user.getUid();
+                Object attribute = session.getAttribute(WebConstant.SESSION_USER);
+                if (attribute != null) {
+                    uid = (Long) attribute;
+                }
             }
 
             log.info("URL:{} remote:{} uid:{} header:{} params:{}", url, remote, uid, headerString, paramString);

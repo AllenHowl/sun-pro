@@ -40,6 +40,16 @@
                 <SizeBasedTriggeringPolicy size="100 MB"/>
             </Policies>
         </RollingFile>
+        <RollingFile name="accessLog" fileName="${sys:user.home}/logs/accessLog.log"
+                     filePattern="${sys:user.home}/logs/?{date:yyyy-MM}/accessLog-%d{yyyy-MM-dd}-%i.log">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="ACCEPT"/>
+            <PatternLayout pattern="${PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
         <!--<RollingFile name="warn" fileName="${sys:user.home}/logs/warn.log"
                      filePattern="${sys:user.home}/logs/?{date:yyyy-MM}/warn-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
@@ -78,7 +88,9 @@
         <logger name="org.mybatis" level="info"></logger>
         <logger name="com.sunliwei" level="debug">
             <AppenderRef ref="projectLog"/>
-
+        </logger>
+        <logger name="accessLog" level="info">
+            <AppenderRef ref="accessLog"></AppenderRef>
         </logger>
         <root level="all">
             <appender-ref ref="Console"/>
