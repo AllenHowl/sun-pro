@@ -17,13 +17,13 @@ spring:
     db1:
       jdbc-url: jdbc:mysql://rm-2zen0g2l5958x88y3so.mysql.rds.aliyuncs.com:3306/fjy_test
       username: fjy
-      password: fanjinyang
+      password: Fan747851076
       driver-class-name: com.mysql.cj.jdbc.Driver
 
     db2:
       jdbc-url: jdbc:mysql://rm-2zen0g2l5958x88y3so.mysql.rds.aliyuncs.com:3306/fjy_test
       username: fjy
-      password: fanjinyang
+      password: Fan747851076
       driver-class-name: com.mysql.cj.jdbc.Driver
 
 
